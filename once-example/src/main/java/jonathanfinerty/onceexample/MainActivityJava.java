@@ -1,5 +1,11 @@
 package jonathanfinerty.onceexample;
 
+import static jonathanfinerty.once.Amount.exactly;
+import static jonathanfinerty.once.Once.THIS_APP_INSTALL;
+import static jonathanfinerty.once.Once.beenDone;
+import static jonathanfinerty.once.Once.clearDone;
+import static jonathanfinerty.once.Once.markDone;
+
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -10,13 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import jonathanfinerty.once.Once;
 
-import static jonathanfinerty.once.Amount.exactly;
-import static jonathanfinerty.once.Once.THIS_APP_INSTALL;
-import static jonathanfinerty.once.Once.beenDone;
-import static jonathanfinerty.once.Once.clearDone;
-import static jonathanfinerty.once.Once.markDone;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivityJava extends AppCompatActivity {
 
     private static final String SHOW_NEW_SESSION_DIALOG = "NewSessionDialog";
     private static final String SHOW_FRESH_INSTALL_DIALOG = "FreshInstallDialog";
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Once.markDone("Application Launched");
+        markDone("Application Launched");
 
         setContentView(R.layout.activity_main);
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialog(String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivityJava.this).create();
         alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 (dialog, which) -> dialog.dismiss());
