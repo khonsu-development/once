@@ -27,7 +27,7 @@ jobs:
       - name: Submit dependencies for GitHub analysis
         uses: mikepenz/gradle-dependency-submission@v1.0.0
         with:
-          gradle-build-module: ":app"
+          gradle-build-module: ":once"
 
       - name: Build with Gradle
         id: build
