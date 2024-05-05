@@ -1,10 +1,11 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android") version "1.9.23"
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     compileSdk = 34
+    namespace = "jonathanfinerty.once"
 
     defaultConfig {
         minSdk = 19
@@ -13,14 +14,13 @@ android {
         release {
             isMinifyEnabled = false
             setProguardFiles(
-                    listOf(
-                            getDefaultProguardFile("proguard-android.txt"),
-                            "proguard-rules.pro",
-                    ),
+                listOf(
+                    getDefaultProguardFile("proguard-android.txt"),
+                    "proguard-rules.pro",
+                ),
             )
         }
     }
-    namespace = "jonathanfinerty.once"
     lint {
         warningsAsErrors = true
     }
@@ -35,10 +35,10 @@ android {
 
 dependencies {
     implementation("androidx.annotation:annotation:1.7.1")
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.1")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.11.1")
+    testImplementation("org.robolectric:robolectric:4.12.1")
     testImplementation("androidx.test:core:1.5.0")
 }
 
