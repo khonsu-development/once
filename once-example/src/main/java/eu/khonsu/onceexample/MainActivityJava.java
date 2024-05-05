@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.concurrent.TimeUnit;
 
 import eu.khonsu.once.Once;
-import jonathanfinerty.onceexample.R;
 
 public class MainActivityJava extends AppCompatActivity {
 

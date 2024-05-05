@@ -6,10 +6,10 @@ plugins {
 
 android {
     compileSdk = 34
-    namespace = "jonathanfinerty.onceexample"
+    namespace = "eu.khonsu.onceexample"
 
     defaultConfig {
-        applicationId = "jonathanfinerty.onceexample"
+        applicationId = "eu.khonsu.onceexample"
         minSdk = 19
         targetSdk = 34
         versionCode = 1

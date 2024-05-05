@@ -11,7 +11,6 @@ import eu.khonsu.once.Once.Companion.beenDone
 import eu.khonsu.once.Once.Companion.clearAll
 import eu.khonsu.once.Once.Companion.clearDone
 import eu.khonsu.once.Once.Companion.markDone
-import jonathanfinerty.onceexample.R
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
