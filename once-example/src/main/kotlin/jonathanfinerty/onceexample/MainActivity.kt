@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this@MainActivity).create()
         alertDialog.setMessage(message)
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEUTRAL, "OK"
+            AlertDialog.BUTTON_NEUTRAL,
+            "OK",
         ) { dialog: DialogInterface, _: Int -> dialog.dismiss() }
         alertDialog.show()
     }

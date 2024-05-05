@@ -15,10 +15,11 @@ class BackwardsCompatibilityTests {
     fun backwardsCompatibilityWithPre1Versions() {
         val tag = "version 0.5 tag"
         val applicationContext = ApplicationProvider.getApplicationContext<Context>()
-        val sharedPreferences = applicationContext.getSharedPreferences(
-            PersistedMap::class.java.getSimpleName() + "TagLastSeenMap",
-            Context.MODE_PRIVATE
-        )
+        val sharedPreferences =
+            applicationContext.getSharedPreferences(
+                PersistedMap::class.java.getSimpleName() + "TagLastSeenMap",
+                Context.MODE_PRIVATE,
+            )
         sharedPreferences.edit().putLong(tag, 1234L).apply()
         Once.initialise(applicationContext)
         Once.markDone(tag)

@@ -13,11 +13,12 @@ internal class PersistedMap(context: Context, mapName: String) {
         preferences = context.getSharedPreferences(preferencesName, Context.MODE_PRIVATE)
         val allPreferences = preferences.all
         for (key in allPreferences.keys) {
-            val values: ArrayList<Long> = try {
-                stringToList(preferences.getString(key, null))
-            } catch (exception: ClassCastException) {
-                loadFromLegacyStorageFormat(key)
-            }
+            val values: ArrayList<Long> =
+                try {
+                    stringToList(preferences.getString(key, null))
+                } catch (exception: ClassCastException) {
+                    loadFromLegacyStorageFormat(key)
+                }
             map[key] = values
         }
     }
@@ -36,7 +37,10 @@ internal class PersistedMap(context: Context, mapName: String) {
     }
 
     @Synchronized
-    fun put(tag: String, timeSeen: Long) {
+    fun put(
+        tag: String,
+        timeSeen: Long,
+    ) {
         var lastSeenTimeStamps = map[tag]
         if (lastSeenTimeStamps == null) {
             lastSeenTimeStamps = ArrayList(1)
@@ -77,8 +81,9 @@ internal class PersistedMap(context: Context, mapName: String) {
         if (stringList.isNullOrEmpty()) {
             return arrayListOf()
         }
-        val strings = stringList.split(DELIMITER.toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
+        val strings =
+            stringList.split(DELIMITER.toRegex()).dropLastWhile { it.isEmpty() }
+                .toTypedArray()
         val list: ArrayList<Long> = ArrayList(strings.size)
         for (stringLong in strings) {
             list.add(stringLong.toLong())

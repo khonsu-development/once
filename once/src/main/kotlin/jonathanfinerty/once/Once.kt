@@ -7,7 +7,6 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class Once {
-
     companion object {
         const val THIS_APP_INSTALL = 0
         const val THIS_APP_VERSION = 1
@@ -47,7 +46,10 @@ class Once {
          * @param tag   A string identifier unique to the operation.
          */
         @JvmStatic
-        fun toDo(@Scope scope: Int, tag: String) {
+        fun toDo(
+            @Scope scope: Int,
+            tag: String,
+        ) {
             val tagSeenList = tagLastSeenMap!![tag]
             if (tagSeenList.isEmpty()) {
                 toDoSet!!.put(tag)
@@ -112,7 +114,10 @@ class Once {
          * @return `true` if the operation associated with `tag` has been marked done the specific `numberOfTimes`.
          */
         @JvmStatic
-        fun beenDone(tag: String, numberOfTimes: CountChecker): Boolean {
+        fun beenDone(
+            tag: String,
+            numberOfTimes: CountChecker,
+        ): Boolean {
             return beenDone(THIS_APP_INSTALL, tag, numberOfTimes)
         }
 
@@ -131,42 +136,44 @@ class Once {
         fun beenDone(
             @Scope scope: Int,
             tag: String,
-            numberOfTimes: CountChecker = Amount.moreThan(0)
+            numberOfTimes: CountChecker = Amount.moreThan(0),
         ): Boolean {
             val tagSeenDates = tagLastSeenMap!![tag]
             return if (tagSeenDates.isEmpty()) {
                 false
-            } else when (scope) {
-                THIS_APP_INSTALL -> numberOfTimes.check(tagSeenDates.size)
-                THIS_APP_SESSION -> {
-                    var counter = 0
-                    val sessionArray = sessionList!!.toTypedArray<String>()
-                    for (tagFromList in sessionArray) {
-                        if (tagFromList == tag) {
-                            counter++
+            } else {
+                when (scope) {
+                    THIS_APP_INSTALL -> numberOfTimes.check(tagSeenDates.size)
+                    THIS_APP_SESSION -> {
+                        var counter = 0
+                        val sessionArray = sessionList!!.toTypedArray<String>()
+                        for (tagFromList in sessionArray) {
+                            if (tagFromList == tag) {
+                                counter++
+                            }
                         }
+                        numberOfTimes.check(counter)
                     }
-                    numberOfTimes.check(counter)
-                }
 
-                THIS_APP_VERSION -> {
-                    var counter = 0
-                    for (seenDate in tagSeenDates) {
-                        if (seenDate > lastAppUpdatedTime) {
-                            counter++
+                    THIS_APP_VERSION -> {
+                        var counter = 0
+                        for (seenDate in tagSeenDates) {
+                            if (seenDate > lastAppUpdatedTime) {
+                                counter++
+                            }
                         }
+                        numberOfTimes.check(counter)
                     }
-                    numberOfTimes.check(counter)
-                }
 
-                else -> {
-                    var counter = 0
-                    for (seenDate in tagSeenDates) {
-                        if (seenDate > lastAppUpdatedTime) {
-                            counter++
+                    else -> {
+                        var counter = 0
+                        for (seenDate in tagSeenDates) {
+                            if (seenDate > lastAppUpdatedTime) {
+                                counter++
+                            }
                         }
+                        numberOfTimes.check(counter)
                     }
-                    numberOfTimes.check(counter)
                 }
             }
         }
@@ -187,7 +194,7 @@ class Once {
             timeUnit: TimeUnit,
             amount: Long,
             tag: String,
-            numberOfTimes: CountChecker = Amount.moreThan(0)
+            numberOfTimes: CountChecker = Amount.moreThan(0),
         ): Boolean {
             val timeInMillis = timeUnit.toMillis(amount)
             return beenDone(timeInMillis, tag, numberOfTimes)
@@ -209,7 +216,7 @@ class Once {
         fun beenDone(
             timeSpanInMillis: Long,
             tag: String,
-            numberOfTimes: CountChecker = Amount.moreThan(0)
+            numberOfTimes: CountChecker = Amount.moreThan(0),
         ): Boolean {
             val tagSeenDates = tagLastSeenMap!![tag]
             if (tagSeenDates.isEmpty()) {
