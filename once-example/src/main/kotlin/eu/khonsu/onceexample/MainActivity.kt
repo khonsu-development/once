@@ -1,16 +1,17 @@
-package jonathanfinerty.onceexample
+package eu.khonsu.onceexample
 
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import jonathanfinerty.once.Amount.Companion.exactly
-import jonathanfinerty.once.Once
-import jonathanfinerty.once.Once.Companion.beenDone
-import jonathanfinerty.once.Once.Companion.clearAll
-import jonathanfinerty.once.Once.Companion.clearDone
-import jonathanfinerty.once.Once.Companion.markDone
+import eu.khonsu.once.Amount.Companion.exactly
+import eu.khonsu.once.Once
+import eu.khonsu.once.Once.Companion.beenDone
+import eu.khonsu.once.Once.Companion.clearAll
+import eu.khonsu.once.Once.Companion.clearDone
+import eu.khonsu.once.Once.Companion.markDone
+import jonathanfinerty.onceexample.R
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {

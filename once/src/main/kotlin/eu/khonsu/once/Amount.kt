@@ -1,4 +1,4 @@
-package jonathanfinerty.once
+package eu.khonsu.once
 
 class Amount {
     companion object {

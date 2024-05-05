@@ -1,10 +1,10 @@
-package jonathanfinerty.onceexample;
+package eu.khonsu.onceexample;
 
-import static jonathanfinerty.once.Amount.exactly;
-import static jonathanfinerty.once.Once.THIS_APP_INSTALL;
-import static jonathanfinerty.once.Once.beenDone;
-import static jonathanfinerty.once.Once.clearDone;
-import static jonathanfinerty.once.Once.markDone;
+import static eu.khonsu.once.Amount.exactly;
+import static eu.khonsu.once.Once.THIS_APP_INSTALL;
+import static eu.khonsu.once.Once.beenDone;
+import static eu.khonsu.once.Once.clearDone;
+import static eu.khonsu.once.Once.markDone;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.TimeUnit;
 
-import jonathanfinerty.once.Once;
+import eu.khonsu.once.Once;
+import jonathanfinerty.onceexample.R;
 
 public class MainActivityJava extends AppCompatActivity {
 

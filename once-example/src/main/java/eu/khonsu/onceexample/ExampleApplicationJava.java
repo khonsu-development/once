@@ -1,8 +1,8 @@
-package jonathanfinerty.onceexample;
+package eu.khonsu.onceexample;
 
 import android.app.Application;
 
-import jonathanfinerty.once.Once;
+import eu.khonsu.once.Once;
 
 public class ExampleApplicationJava extends Application {
 

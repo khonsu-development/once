@@ -1,4 +1,4 @@
-package jonathanfinerty.once
+package eu.khonsu.once
 
 import android.content.Context
 import android.content.pm.PackageManager

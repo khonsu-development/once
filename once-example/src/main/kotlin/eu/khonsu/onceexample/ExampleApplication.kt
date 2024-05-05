@@ -1,7 +1,7 @@
-package jonathanfinerty.onceexample
+package eu.khonsu.onceexample
 
 import android.app.Application
-import jonathanfinerty.once.Once.Companion.initialise
+import eu.khonsu.once.Once.Companion.initialise
 
 class ExampleApplication : Application() {
     override fun onCreate() {

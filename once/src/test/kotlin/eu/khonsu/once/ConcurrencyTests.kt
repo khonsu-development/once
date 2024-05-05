@@ -1,4 +1,4 @@
-package jonathanfinerty.once
+package eu.khonsu.once
 
 import androidx.test.core.app.ApplicationProvider
 import org.junit.After

@@ -6,7 +6,7 @@ plugins {
 
 android {
     compileSdk = 34
-    namespace = "jonathanfinerty.once"
+    namespace = "eu.khonsu.once"
 
     defaultConfig {
         minSdk = 19
