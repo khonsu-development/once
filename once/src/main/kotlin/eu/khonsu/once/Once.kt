@@ -1,3 +1,5 @@
+@file:Suppress("unused") // Used by clients
+
 package eu.khonsu.once
 
 import android.content.Context
