@@ -2,11 +2,15 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("maven-publish")
 }
+
+group = "eu.khonsu.libraries"
+version = "1.1-SNAPSHOT"
 
 android {
     compileSdk = 34
-    namespace = "eu.khonsu.once"
+    namespace = "eu.khonsu.libraries.once"
 
     defaultConfig {
         minSdk = 19
@@ -45,4 +49,18 @@ dependencies {
 
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = project.group as String
+            artifactId = "material-cards"
+            version = project.version as String
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }

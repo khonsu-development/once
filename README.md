@@ -164,6 +164,15 @@ and [Paul Simmons](https://twitter.com/slamminsoup) also provided invaluable fee
 Pull requests and github issues are more than welcome and you can get in touch with me
 directly [@jonfinerty](https://twitter.com/jonfinerty).
 
+## How to create a new artefact on Jitpack
+
+JitPack is an easy-to-use package repository for Git. It is where this Android library is published.
+
+In order to publish the latest version of this library on Jitpack:
+
+Go to https://jitpack.io/#khonsu-development/once
+Click on "Get it", next to the desired version.
+
 ## License
 
 ```
