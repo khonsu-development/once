@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "eu.khonsu.onceexample"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -34,6 +34,6 @@ android {
 
 dependencies {
     implementation(project(":once"))
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.core:core-ktx:1.13.1")
 }
