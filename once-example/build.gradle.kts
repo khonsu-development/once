@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "eu.khonsu.onceexample"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
