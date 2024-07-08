@@ -9,7 +9,7 @@ group = "eu.khonsu.libraries"
 version = "1.1-SNAPSHOT"
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     namespace = "eu.khonsu.libraries.once"
 
     defaultConfig {
@@ -44,7 +44,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.12.1")
-    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:core:1.6.1")
 }
 
 repositories {
