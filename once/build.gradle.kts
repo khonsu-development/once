@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.annotation:annotation:1.8.2")
+    implementation("androidx.annotation:annotation:1.9.0")
     implementation("androidx.core:core-ktx:1.13.1")
 
     testImplementation("junit:junit:4.13.2")
