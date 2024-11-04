@@ -40,7 +40,7 @@ android {
 
 dependencies {
     implementation("androidx.annotation:annotation:1.9.0")
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.15.0")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.13")
