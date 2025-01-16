@@ -34,6 +34,6 @@ android {
 
 dependencies {
     implementation(project(":once"))
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.core:core-ktx:1.15.0")
+    implementation(libs.appcompat)
+    implementation(libs.core.ktx)
 }

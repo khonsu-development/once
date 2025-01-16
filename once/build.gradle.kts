@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
-    id("maven-publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.maven.publish)
 }
 
 group = "eu.khonsu.libraries"
@@ -39,12 +39,12 @@ android {
 }
 
 dependencies {
-    implementation("androidx.annotation:annotation:1.9.1")
-    implementation("androidx.core:core-ktx:1.15.0")
+    implementation(libs.annotation)
+    implementation(libs.core.ktx)
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.14.1")
-    testImplementation("androidx.test:core:1.6.1")
+    testImplementation(libs.junit.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.android.test.core)
 }
 
 repositories {
