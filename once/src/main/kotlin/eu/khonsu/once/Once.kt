@@ -80,9 +80,7 @@ class Once {
          * @return `true` if the operation associated with `tag` has been marked 'to do' and has not been passed to `markDone()` since.
          */
         @JvmStatic
-        fun needToDo(tag: String): Boolean {
-            return toDoSet!!.contains(tag)
-        }
+        fun needToDo(tag: String): Boolean = toDoSet!!.contains(tag)
 
         @JvmStatic
         fun lastDone(tag: String): Date? {
@@ -104,9 +102,7 @@ class Once {
          * the given `scope`.
          */
         @JvmStatic
-        fun beenDone(tag: String): Boolean {
-            return beenDone(THIS_APP_INSTALL, tag, Amount.moreThan(0))
-        }
+        fun beenDone(tag: String): Boolean = beenDone(THIS_APP_INSTALL, tag, Amount.moreThan(0))
 
         /**
          * Check if a tag has been done a specific number of times.
@@ -119,9 +115,7 @@ class Once {
         fun beenDone(
             tag: String,
             numberOfTimes: CountChecker,
-        ): Boolean {
-            return beenDone(THIS_APP_INSTALL, tag, numberOfTimes)
-        }
+        ): Boolean = beenDone(THIS_APP_INSTALL, tag, numberOfTimes)
 
         /**
          * Checks if a tag has been marked done within a given scope a specific number of times.

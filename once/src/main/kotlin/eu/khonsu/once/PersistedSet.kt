@@ -2,8 +2,12 @@ package eu.khonsu.once
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
-internal class PersistedSet(context: Context, setName: String) {
+internal class PersistedSet(
+    context: Context,
+    setName: String,
+) {
     private val preferences: SharedPreferences
     private val set: MutableSet<String>
 
@@ -18,9 +22,7 @@ internal class PersistedSet(context: Context, setName: String) {
         updatePreferences()
     }
 
-    operator fun contains(tag: String): Boolean {
-        return set.contains(tag)
-    }
+    operator fun contains(tag: String): Boolean = set.contains(tag)
 
     fun remove(tag: String) {
         set.remove(tag)
@@ -33,9 +35,7 @@ internal class PersistedSet(context: Context, setName: String) {
     }
 
     private fun updatePreferences() {
-        val edit = preferences.edit()
-        edit.putStringSet(STRING_SET_KEY, set)
-        edit.apply()
+        preferences.edit { putStringSet(STRING_SET_KEY, set) }
     }
 
     companion object {

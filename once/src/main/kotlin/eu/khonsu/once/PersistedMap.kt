@@ -2,9 +2,13 @@ package eu.khonsu.once
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import java.util.concurrent.ConcurrentHashMap
 
-internal class PersistedMap(context: Context, mapName: String) {
+internal class PersistedMap(
+    context: Context,
+    mapName: String,
+) {
     private val preferences: SharedPreferences
     private val map: MutableMap<String, ArrayList<Long>> = ConcurrentHashMap()
 
@@ -27,7 +31,7 @@ internal class PersistedMap(context: Context, mapName: String) {
         val value = preferences.getLong(key, -1)
         val values: ArrayList<Long> = ArrayList(1)
         values.add(value)
-        preferences.edit().putString(key, listToString(values)).apply()
+        preferences.edit { putString(key, listToString(values)) }
         return values
     }
 
@@ -47,23 +51,17 @@ internal class PersistedMap(context: Context, mapName: String) {
         }
         lastSeenTimeStamps.add(timeSeen)
         map[tag] = lastSeenTimeStamps
-        val edit = preferences.edit()
-        edit.putString(tag, listToString(lastSeenTimeStamps))
-        edit.apply()
+        preferences.edit { putString(tag, listToString(lastSeenTimeStamps)) }
     }
 
     fun remove(tag: String) {
         map.remove(tag)
-        val edit = preferences.edit()
-        edit.remove(tag)
-        edit.apply()
+        preferences.edit { remove(tag) }
     }
 
     fun clear() {
         map.clear()
-        val edit = preferences.edit()
-        edit.clear()
-        edit.apply()
+        preferences.edit { clear() }
     }
 
     private fun listToString(list: List<Long>): String {
@@ -82,7 +80,9 @@ internal class PersistedMap(context: Context, mapName: String) {
             return arrayListOf()
         }
         val strings =
-            stringList.split(DELIMITER.toRegex()).dropLastWhile { it.isEmpty() }
+            stringList
+                .split(DELIMITER.toRegex())
+                .dropLastWhile { it.isEmpty() }
                 .toTypedArray()
         val list: ArrayList<Long> = ArrayList(strings.size)
         for (stringLong in strings) {
