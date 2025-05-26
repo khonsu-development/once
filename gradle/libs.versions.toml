@@ -6,7 +6,7 @@ annotation = "1.9.1"
 gradle = "8.9.2"
 junitVersion = "4.13.2"
 kotlinGradlePlugin = "2.1.0"
-ktlint = "12.1.1"
+ktlint = "12.3.0"
 robolectric = "4.14.1"
 
 [plugins]
