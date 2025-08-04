@@ -1,7 +1,7 @@
 [versions]
 androidAppcompat = "1.7.0"
 androidCoreKtx = "1.16.0"
-androidTestCore = "1.6.1"
+androidTestCore = "1.7.0"
 annotation = "1.9.1"
 gradle = "8.10.1"
 junitVersion = "4.13.2"
