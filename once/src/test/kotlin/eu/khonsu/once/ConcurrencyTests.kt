@@ -11,8 +11,11 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.TimeUnit
 
+@Config(
+    sdk = [28],
+    manifest = Config.NONE,
+)
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [28])
 class ConcurrencyTests {
     @Before
     fun setup() {
@@ -40,7 +43,7 @@ class ConcurrencyTests {
     private fun testConcurrency(functionUnderTest: Runnable) {
         val threadFactory = ExceptionTrackingThreadFactory()
         val exec = Executors.newFixedThreadPool(16, threadFactory)
-        for (i in 0..9999) {
+        (0..9999).forEach { _ ->
             exec.execute(functionUnderTest)
         }
         exec.shutdown()
