@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
     namespace = "eu.khonsu.onceexample"
 
     defaultConfig {
@@ -22,9 +22,10 @@ android {
     }
     lint {
         warningsAsErrors = true
+        abortOnError = false
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

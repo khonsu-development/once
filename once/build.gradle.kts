@@ -9,7 +9,7 @@ group = "eu.khonsu.libraries"
 version = "1.1-SNAPSHOT"
 
 android {
-    compileSdk = 35
+    compileSdk = 36
     namespace = "eu.khonsu.libraries.once"
 
     defaultConfig {
@@ -26,15 +26,19 @@ android {
             )
         }
     }
+    publishing {
+        singleVariant("release") {}
+    }
     lint {
         warningsAsErrors = true
-    }
-    kotlinOptions {
-        jvmTarget = "17"
+        abortOnError = false
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
     }
 }
 
