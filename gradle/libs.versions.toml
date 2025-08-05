@@ -1,13 +1,13 @@
 [versions]
-androidAppcompat = "1.7.0"
+androidAppcompat = "1.7.1"
 androidCoreKtx = "1.16.0"
-androidTestCore = "1.6.1"
+androidTestCore = "1.7.0"
 annotation = "1.9.1"
 gradle = "8.11.0"
 junitVersion = "4.13.2"
-kotlinGradlePlugin = "2.1.0"
+kotlinGradlePlugin = "2.2.0"
 ktlint = "12.3.0"
-robolectric = "4.14.1"
+robolectric = "4.15.1"
 
 [plugins]
 android-library = { id = "com.android.library" }
