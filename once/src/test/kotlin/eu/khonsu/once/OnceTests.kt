@@ -13,8 +13,11 @@ import org.robolectric.annotation.Config
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
+@Config(
+    sdk = [28],
+    manifest = Config.NONE,
+)
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [28])
 class OnceTests {
     @Before
     fun setup() {
