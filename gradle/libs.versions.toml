@@ -1,6 +1,6 @@
 [versions]
 androidAppcompat = "1.7.1"
-androidCoreKtx = "1.16.0"
+androidCoreKtx = "1.17.0"
 androidTestCore = "1.7.0"
 annotation = "1.9.1"
 gradle = "8.11.0"
