@@ -31,7 +31,7 @@ internal class PersistedMap(
         val value = preferences.getLong(key, -1)
         val values: ArrayList<Long> = ArrayList(1)
         values.add(value)
-        preferences.edit { putString(key, listToString(values)) }
+        preferences.edit(commit = true) { putString(key, listToString(values)) }
         return values
     }
 
@@ -51,17 +51,17 @@ internal class PersistedMap(
         }
         lastSeenTimeStamps.add(timeSeen)
         map[tag] = lastSeenTimeStamps
-        preferences.edit { putString(tag, listToString(lastSeenTimeStamps)) }
+        preferences.edit(commit = true) { putString(tag, listToString(lastSeenTimeStamps)) }
     }
 
     fun remove(tag: String) {
         map.remove(tag)
-        preferences.edit { remove(tag) }
+        preferences.edit(commit = true) { remove(tag) }
     }
 
     fun clear() {
         map.clear()
-        preferences.edit { clear() }
+        preferences.edit(commit = true) { clear() }
     }
 
     private fun listToString(list: List<Long>): String {

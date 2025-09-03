@@ -35,7 +35,7 @@ internal class PersistedSet(
     }
 
     private fun updatePreferences() {
-        preferences.edit { putStringSet(STRING_SET_KEY, set) }
+        preferences.edit(commit = true) { putStringSet(STRING_SET_KEY, set) }
     }
 
     companion object {
