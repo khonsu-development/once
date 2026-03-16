@@ -1,9 +1,9 @@
 [versions]
 androidAppcompat = "1.7.1"
-androidCoreKtx = "1.17.0"
+androidCoreKtx = "1.18.0"
 androidTestCore = "1.7.0"
 annotation = "1.9.1"
-gradle = "8.13.2"
+gradle = "9.1.0"
 junitVersion = "4.13.2"
 kotlinGradlePlugin = "2.3.0"
 ktlint = "14.2.0"
@@ -11,7 +11,6 @@ robolectric = "4.16.1"
 
 [plugins]
 android-library = { id = "com.android.library" }
-kotlin-android = { id = "kotlin-android" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 maven-publish = { id = "maven-publish" }
 

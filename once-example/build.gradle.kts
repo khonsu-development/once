@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("org.jlleitschuh.gradle.ktlint") version libs.versions.ktlint
 }
 
@@ -10,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "eu.khonsu.onceexample"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"

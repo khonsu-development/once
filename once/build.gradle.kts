@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.maven.publish)
 }
@@ -13,14 +12,14 @@ android {
     namespace = "eu.khonsu.libraries.once"
 
     defaultConfig {
-        minSdk = 19
+        minSdk = 21
     }
     buildTypes {
         release {
             isMinifyEnabled = false
             setProguardFiles(
                 listOf(
-                    getDefaultProguardFile("proguard-android.txt"),
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro",
                 ),
             )
