@@ -58,7 +58,7 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = project.group as String
-            artifactId = "material-cards"
+            artifactId = "once"
             version = project.version as String
 
             afterEvaluate {
