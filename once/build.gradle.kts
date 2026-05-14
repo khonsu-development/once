@@ -49,10 +49,6 @@ dependencies {
     testImplementation(libs.android.test.core)
 }
 
-repositories {
-    mavenCentral()
-}
-
 publishing {
     publications {
         register<MavenPublication>("release") {
