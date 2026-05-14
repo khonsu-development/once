@@ -30,7 +30,6 @@ android {
     }
     lint {
         warningsAsErrors = true
-        abortOnError = false
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
