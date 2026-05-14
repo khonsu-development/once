@@ -82,6 +82,28 @@ class ToDoTests {
     }
 
     @Test
+    fun markedDoneToDoRemainsGoneAfterRestart() {
+        val tag = "persisted to do task"
+        Once.toDo(tag)
+        assertTrue(Once.needToDo(tag))
+        Once.markDone(tag)
+        assertFalse(Once.needToDo(tag))
+
+        Once.initialise(ApplicationProvider.getApplicationContext())
+        assertFalse(Once.needToDo(tag))
+    }
+
+    @Test
+    fun addedToDoSurvivesRestart() {
+        val tag = "surviving to do task"
+        Once.toDo(tag)
+        assertTrue(Once.needToDo(tag))
+
+        Once.initialise(ApplicationProvider.getApplicationContext())
+        assertTrue(Once.needToDo(tag))
+    }
+
+    @Test
     fun todoThisAppVersion() {
         val tag = "todo this app version task"
         Once.toDo(Once.THIS_APP_VERSION, tag)

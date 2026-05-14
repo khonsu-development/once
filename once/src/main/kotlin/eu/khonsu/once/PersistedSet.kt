@@ -14,7 +14,10 @@ internal class PersistedSet(
     init {
         val preferencesName = "PersistedSet$setName"
         preferences = context.getSharedPreferences(preferencesName, Context.MODE_PRIVATE)
-        set = preferences.getStringSet(STRING_SET_KEY, mutableSetOf()) ?: mutableSetOf()
+        // Defensive copy: getStringSet() returns a reference to SharedPreferences' internal set.
+        // Mutating it in place then calling putStringSet() with the same reference causes
+        // SharedPreferences to skip the disk write (old and new values are the same object).
+        set = preferences.getStringSet(STRING_SET_KEY, emptySet())?.toMutableSet() ?: mutableSetOf()
     }
 
     fun put(tag: String) {
@@ -35,7 +38,7 @@ internal class PersistedSet(
     }
 
     private fun updatePreferences() {
-        preferences.edit(commit = true) { putStringSet(STRING_SET_KEY, set) }
+        preferences.edit(commit = true) { putStringSet(STRING_SET_KEY, set.toSet()) }
     }
 
     companion object {
