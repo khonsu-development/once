@@ -200,6 +200,22 @@ class OnceTests {
         assertTrue(lastDoneDate!!.time - expectedDate.time < 10)
     }
 
+    @Test
+    fun markedDoneSurvivesRestart() {
+        Once.markDone(TAG_UNDER_TEST)
+        assertTrue(Once.beenDone(TAG_UNDER_TEST))
+
+        Once.initialise(ApplicationProvider.getApplicationContext())
+        assertTrue(Once.beenDone(TAG_UNDER_TEST))
+    }
+
+    @Test
+    fun lastDoneAfterClearDone() {
+        Once.markDone(TAG_UNDER_TEST)
+        Once.clearDone(TAG_UNDER_TEST)
+        assertNull(Once.lastDone(TAG_UNDER_TEST))
+    }
+
     companion object {
         private const val TAG_UNDER_TEST = "testTag"
     }

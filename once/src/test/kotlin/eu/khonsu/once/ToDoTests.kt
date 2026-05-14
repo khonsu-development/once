@@ -104,6 +104,39 @@ class ToDoTests {
     }
 
     @Test
+    fun clearToDo() {
+        val tag = "clearable to do task"
+        Once.toDo(tag)
+        assertTrue(Once.needToDo(tag))
+        Once.clearToDo(tag)
+        assertFalse(Once.needToDo(tag))
+    }
+
+    @Test
+    fun clearAllToDos() {
+        val tag1 = "to do task 1"
+        val tag2 = "to do task 2"
+        Once.toDo(tag1)
+        Once.toDo(tag2)
+        assertTrue(Once.needToDo(tag1))
+        assertTrue(Once.needToDo(tag2))
+        Once.clearAllToDos()
+        assertFalse(Once.needToDo(tag1))
+        assertFalse(Once.needToDo(tag2))
+    }
+
+    @Test
+    fun clearToDoDoesNotAffectOtherTags() {
+        val tag1 = "to do task A"
+        val tag2 = "to do task B"
+        Once.toDo(tag1)
+        Once.toDo(tag2)
+        Once.clearToDo(tag1)
+        assertFalse(Once.needToDo(tag1))
+        assertTrue(Once.needToDo(tag2))
+    }
+
+    @Test
     fun todoThisAppVersion() {
         val tag = "todo this app version task"
         Once.toDo(Once.THIS_APP_VERSION, tag)

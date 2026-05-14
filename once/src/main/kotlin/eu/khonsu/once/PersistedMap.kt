@@ -29,8 +29,7 @@ internal class PersistedMap(
 
     private fun loadFromLegacyStorageFormat(key: String): ArrayList<Long> {
         val value = preferences.getLong(key, -1)
-        val values: ArrayList<Long> = ArrayList(1)
-        values.add(value)
+        val values = arrayListOf(value)
         preferences.edit(commit = true) { putString(key, listToString(values)) }
         return values
     }
@@ -64,31 +63,13 @@ internal class PersistedMap(
         preferences.edit(commit = true) { clear() }
     }
 
-    private fun listToString(list: List<Long>): String {
-        val stringBuilder = StringBuilder()
-        var loopDelimiter = ""
-        for (l in list) {
-            stringBuilder.append(loopDelimiter)
-            stringBuilder.append(l)
-            loopDelimiter = DELIMITER
-        }
-        return stringBuilder.toString()
-    }
+    private fun listToString(list: List<Long>): String = list.joinToString(DELIMITER)
 
     private fun stringToList(stringList: String?): ArrayList<Long> {
         if (stringList.isNullOrEmpty()) {
             return arrayListOf()
         }
-        val strings =
-            stringList
-                .split(DELIMITER.toRegex())
-                .dropLastWhile { it.isEmpty() }
-                .toTypedArray()
-        val list: ArrayList<Long> = ArrayList(strings.size)
-        for (stringLong in strings) {
-            list.add(stringLong.toLong())
-        }
-        return list
+        return stringList.split(DELIMITER).mapTo(ArrayList()) { it.toLong() }
     }
 
     companion object {

@@ -16,9 +16,9 @@ class Once {
         const val THIS_APP_SESSION = 2
 
         private var lastAppUpdatedTime: Long = -1
-        private var tagLastSeenMap: PersistedMap? = null
-        private var toDoSet: PersistedSet? = null
-        private var sessionList: ArrayList<String>? = null
+        private lateinit var tagLastSeenMap: PersistedMap
+        private lateinit var toDoSet: PersistedSet
+        private var sessionList: MutableList<String>? = null
 
         /**
          * This method needs to be called before Once can be used.
@@ -62,44 +62,50 @@ class Once {
             @Scope scope: Int,
             tag: String,
         ) {
-            val tagSeenList = tagLastSeenMap!![tag]
+            val tagSeenList = tagLastSeenMap[tag]
             if (tagSeenList.isEmpty()) {
-                toDoSet!!.put(tag)
+                toDoSet.put(tag)
                 return
             }
-            val tagLastSeen = tagSeenList[tagSeenList.size - 1]
+            val tagLastSeen = tagSeenList.last()
             if (scope == THIS_APP_VERSION && tagLastSeen <= lastAppUpdatedTime) {
-                toDoSet!!.put(tag)
+                toDoSet.put(tag)
             }
         }
 
         /**
-         * Mark a tag as 'to do' regardless of whether or not its ever been marked done before
+         * Mark a tag as 'to do' regardless of whether or not its ever been marked done before.
          *
          * @param tag A string identifier unique to the operation.
          */
         @JvmStatic
         fun toDo(tag: String) {
-            toDoSet!!.put(tag)
+            toDoSet.put(tag)
         }
 
         /**
          * Checks if a tag is currently marked as 'to do'.
          *
          * @param tag A string identifier unique to the operation.
-         * @return `true` if the operation associated with `tag` has been marked 'to do' and has not been passed to `markDone()` since.
+         * @return `true` if the operation associated with `tag` has been marked 'to do' and has
+         * not been passed to `markDone()` since.
          */
         @JvmStatic
-        fun needToDo(tag: String): Boolean = toDoSet!!.contains(tag)
+        fun needToDo(tag: String): Boolean = toDoSet.contains(tag)
 
+        /**
+         * Returns the date at which a tag was last marked done, or null if it has never been done.
+         *
+         * @param tag A string identifier unique to the operation.
+         * @return The [Date] at which the tag was last marked done, or `null` if never done.
+         */
         @JvmStatic
         fun lastDone(tag: String): Date? {
-            val lastSeenTimeStamps = tagLastSeenMap!![tag]
+            val lastSeenTimeStamps = tagLastSeenMap[tag]
             if (lastSeenTimeStamps.isEmpty()) {
                 return null
             }
-            val lastTimestamp = lastSeenTimeStamps[lastSeenTimeStamps.size - 1]
-            return Date(lastTimestamp)
+            return Date(lastSeenTimeStamps.last())
         }
 
         /**
@@ -144,55 +150,36 @@ class Once {
             tag: String,
             numberOfTimes: CountChecker = Amount.moreThan(0),
         ): Boolean {
-            val tagSeenDates = tagLastSeenMap!![tag]
-            return if (tagSeenDates.isEmpty()) {
-                false
-            } else {
-                when (scope) {
-                    THIS_APP_INSTALL -> numberOfTimes.check(tagSeenDates.size)
-                    THIS_APP_SESSION -> {
-                        var counter = 0
-                        val sessionArray = sessionList!!.toTypedArray<String>()
-                        for (tagFromList in sessionArray) {
-                            if (tagFromList == tag) {
-                                counter++
-                            }
-                        }
-                        numberOfTimes.check(counter)
-                    }
-
-                    THIS_APP_VERSION -> {
-                        var counter = 0
-                        for (seenDate in tagSeenDates) {
-                            if (seenDate > lastAppUpdatedTime) {
-                                counter++
-                            }
-                        }
-                        numberOfTimes.check(counter)
-                    }
-
-                    else -> {
-                        var counter = 0
-                        for (seenDate in tagSeenDates) {
-                            if (seenDate > lastAppUpdatedTime) {
-                                counter++
-                            }
-                        }
-                        numberOfTimes.check(counter)
-                    }
+            val tagSeenDates = tagLastSeenMap[tag]
+            if (tagSeenDates.isEmpty()) {
+                return false
+            }
+            return when (scope) {
+                THIS_APP_INSTALL -> numberOfTimes.check(tagSeenDates.size)
+                THIS_APP_SESSION -> {
+                    val counter = sessionList!!.count { it == tag }
+                    numberOfTimes.check(counter)
                 }
+
+                THIS_APP_VERSION -> {
+                    val counter = tagSeenDates.count { it > lastAppUpdatedTime }
+                    numberOfTimes.check(counter)
+                }
+
+                else -> throw IllegalArgumentException("Unknown scope: $scope")
             }
         }
 
         /**
-         * Checks if a tag has been marked done within a given time span a specific number of times. (e.g. twice in the last 5 minutes)
+         * Checks if a tag has been marked done within a given time span a specific number of
+         * times (e.g. twice in the last 5 minutes).
          *
          * @param timeUnit      The units of time to work in.
          * @param amount        The quantity of timeUnit.
          * @param tag           A string identifier unique to the operation.
          * @param numberOfTimes Requirement for how many times the operation must have be done.
-         * @return `true` if the operation associated with `tag` has been marked done at least `numberOfTimes`
-         * within the last provide time span.
+         * @return `true` if the operation associated with `tag` has been marked done at least
+         * `numberOfTimes` within the last provide time span.
          */
         @JvmStatic
         @JvmOverloads
@@ -207,7 +194,7 @@ class Once {
         }
 
         /**
-         * Checks if a tag has been marked done within a the last `timeSpanInMillis` milliseconds
+         * Checks if a tag has been marked done within the last `timeSpanInMillis` milliseconds
          * a specific number of times.
          *
          * @param timeSpanInMillis How many milliseconds ago to check if a tag has been marked done
@@ -224,17 +211,12 @@ class Once {
             tag: String,
             numberOfTimes: CountChecker = Amount.moreThan(0),
         ): Boolean {
-            val tagSeenDates = tagLastSeenMap!![tag]
+            val tagSeenDates = tagLastSeenMap[tag]
             if (tagSeenDates.isEmpty()) {
                 return false
             }
-            var counter = 0
-            for (seenDate in tagSeenDates) {
-                val sinceSinceCheckTime = Date().time - timeSpanInMillis
-                if (seenDate > sinceSinceCheckTime) {
-                    counter++
-                }
-            }
+            val sinceCheckTime = Date().time - timeSpanInMillis
+            val counter = tagSeenDates.count { it > sinceCheckTime }
             return numberOfTimes.check(counter)
         }
 
@@ -246,9 +228,9 @@ class Once {
          */
         @JvmStatic
         fun markDone(tag: String) {
-            tagLastSeenMap!!.put(tag, Date().time)
+            tagLastSeenMap.put(tag, Date().time)
             sessionList!!.add(tag)
-            toDoSet!!.remove(tag)
+            toDoSet.remove(tag)
         }
 
         /**
@@ -259,19 +241,19 @@ class Once {
          */
         @JvmStatic
         fun clearDone(tag: String) {
-            tagLastSeenMap!!.remove(tag)
+            tagLastSeenMap.remove(tag)
             sessionList!!.remove(tag)
         }
 
         /**
-         * Clears a tag as 'to do'. All checks with `needToDo()` with that tag will return `false` until
-         * it is marked 'to do' again.
+         * Clears a tag as 'to do'. All checks with `needToDo()` with that tag will return `false`
+         * until it is marked 'to do' again.
          *
          * @param tag A string identifier unique to the operation.
          */
         @JvmStatic
         fun clearToDo(tag: String) {
-            toDoSet!!.remove(tag)
+            toDoSet.remove(tag)
         }
 
         /**
@@ -280,7 +262,7 @@ class Once {
          */
         @JvmStatic
         fun clearAll() {
-            tagLastSeenMap!!.clear()
+            tagLastSeenMap.clear()
             sessionList!!.clear()
         }
 
@@ -290,7 +272,7 @@ class Once {
          */
         @JvmStatic
         fun clearAllToDos() {
-            toDoSet!!.clear()
+            toDoSet.clear()
         }
     }
 
