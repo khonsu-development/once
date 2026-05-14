@@ -30,6 +30,7 @@ android {
     }
     lint {
         warningsAsErrors = true
+        disable += "AndroidGradlePluginVersion"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
