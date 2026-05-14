@@ -115,18 +115,10 @@ either `Amount.lessThan(int x)` times or `Amount.moreThan(int x)` times. When yo
 particular amount, Once will default to `Amount.moreThan(0)` i.e. checking if it's ever been done at
 all.
 
-To de-noise your code a bit more you can also static-import the `Once` methods, so usage looks a bit
-cleaner
+To de-noise your code a bit more you can import the `Once` companion methods directly
+(e.g. `import eu.khonsu.once.Once.Companion.beenDone`), so usage looks a bit cleaner:
 
 ```kotlin
-import static
-
-eu.khonsu.once.Once.THIS_APP_INSTALL
-import static eu.khonsu.once.Once.beenDone
-import static eu.khonsu.once.Once.markDone
-
-//...
-
 if (!beenDone(THIS_APP_VERSION, tagName)) {
     // ...
     markDone(showWhatsNew)
@@ -135,40 +127,29 @@ if (!beenDone(THIS_APP_VERSION, tagName)) {
 
 ## Installation
 
-Add a library dependency to your app module's `build.gradle.kts`:
+Add JitPack to your repositories and the library dependency to your app module's `build.gradle.kts`:
 
 ```kotlin
+repositories {
+    maven(url = "https://jitpack.io")
+}
+
 dependencies {
-    implementation("eu.khonsu.once:once:1.3.1")
+    implementation("com.github.khonsu-development:once:<version>")
 }
 ```
 
-You'll need to have `mavenCentral()` in your list of repositories.
-
 ## Example
 
-Try out the sample app
-here: https://play.google.com/store/apps/details?id=jonathanfinerty.onceexample and have a look at
-its source code in `once-example/` for more simple usage.
+Have a look at the source code in `once-example/` for simple usage examples.
 
-## Contributing
-
-`Once` was made in '20%' time at [Huddle](https://talentcommunity.huddle.com/), where it's used to
-help build
-our [Android apps](https://play.google.com/store/apps/details?id=com.huddle.huddle). [Pete O'Grady](https://twitter.com/peteog)
-and [Paul Simmons](https://twitter.com/slamminsoup) also provided invaluable feedback.
-
-Pull requests and github issues are more than welcome and you can get in touch with me
-directly [@jonfinerty](https://twitter.com/jonfinerty).
-
-## How to create a new artefact on Jitpack
+## How to create a new artifact on JitPack
 
 JitPack is an easy-to-use package repository for Git. It is where this Android library is published.
 
-In order to publish the latest version of this library on Jitpack:
+In order to publish the latest version of this library on JitPack:
 
-Go to https://jitpack.io/#khonsu-development/once
-Click on "Get it", next to the desired version.
+Go to https://jitpack.io/#khonsu-development/once and click on "Get it" next to the desired version.
 
 ## License
 
