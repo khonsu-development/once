@@ -1,9 +1,6 @@
 # Once
 
-[![Android Weekly](http://img.shields.io/badge/Android%20Weekly-%23164-33B5E5.svg?style=flat)](http://androidweekly.net/issues/issue-164)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Once-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2206)
-
-A small Android library to manage one-off operations for API 14 and higher.
+A small Android library to manage one-off operations for API 21 and higher.
 
 Forked from https://github.com/jonfinerty/Once and converted to Kotlin.
 
@@ -176,7 +173,8 @@ Click on "Get it", next to the desired version.
 ## License
 
 ```
-Copyright 2021 Jon Finerty
+Copyright 2015 Jon Finerty
+Copyright 2021 Khonsu Development
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
