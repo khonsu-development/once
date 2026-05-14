@@ -20,7 +20,7 @@ internal class PersistedMap(
             val values: ArrayList<Long> =
                 try {
                     stringToList(preferences.getString(key, null))
-                } catch (exception: ClassCastException) {
+                } catch (_: ClassCastException) {
                     loadFromLegacyStorageFormat(key)
                 }
             map[key] = values
