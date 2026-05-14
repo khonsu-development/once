@@ -4,6 +4,7 @@ package eu.khonsu.once
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.annotation.IntDef
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -34,7 +35,16 @@ class Once {
             }
             val packageManager = context.packageManager
             try {
-                val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
+                val packageInfo =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        packageManager.getPackageInfo(
+                            context.packageName,
+                            PackageManager.PackageInfoFlags.of(0),
+                        )
+                    } else {
+                        @Suppress("DEPRECATION")
+                        packageManager.getPackageInfo(context.packageName, 0)
+                    }
                 lastAppUpdatedTime = packageInfo.lastUpdateTime
             } catch (ignored: PackageManager.NameNotFoundException) {
             }
