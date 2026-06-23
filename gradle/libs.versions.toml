@@ -5,7 +5,7 @@ androidTestCore = "1.7.0"
 annotation = "1.10.0"
 gradle = "9.2.1"
 junitVersion = "4.13.2"
-kotlinGradlePlugin = "2.3.0"
+kotlinGradlePlugin = "2.4.0"
 ktlint = "14.2.0"
 robolectric = "4.16.1"
 
