@@ -7,7 +7,7 @@ gradle = "9.2.1"
 junitVersion = "4.13.2"
 kotlinGradlePlugin = "2.4.0"
 ktlint = "14.2.0"
-robolectric = "4.16.1"
+robolectric = "4.17"
 
 [plugins]
 android-library = { id = "com.android.library" }
