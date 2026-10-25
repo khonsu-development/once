@@ -1,8 +1,8 @@
 [versions]
 androidAppcompat = "1.8.0"
-androidCoreKtx = "1.19.0"
+androidCoreKtx = "1.19.1"
 androidTestCore = "1.7.0"
-annotation = "1.10.0"
+annotation = "1.11.0"
 gradle = "9.2.1"
 junitVersion = "4.13.2"
 kotlinGradlePlugin = "2.4.0"
